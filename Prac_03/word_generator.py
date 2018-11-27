@@ -2,46 +2,33 @@ import random
 
 VOWELS = "aeiou"
 CONSONANTS = "bcdfghjklmnpqrstvwxyz"
+def main():
+    word_format = input("Enter word format\n(v) - vowels\n(c) - consonants")
+    while not is_valid_format(word_format):
+        print("Invalid word format")
+        word_format = input("Enter word format\n(v) - vowels\n(c) - consonants")
 
-"""
-word_format = "ccvcvvc"
-word = ""
+    word = ""
 
-for kind in word_format:
-    if kind == "c":
-        word += random.choice(CONSONANTS)
-    else:
-        word += random.choice(VOWELS)
-print(word)
-"""
+    for kind in word_format:
+        if kind == "c":
+            word += random.choice(CONSONANTS)
+        else:
+            word += random.choice(VOWELS)
+    print(word)
 
-# Use wildcards for the vowels (#) and consonants (%) or either (*) and make alphabetical characters use that actual character - e.g. the format “%re#*l*” might produce a word like “greatly” or “breuzla”
-"""
-word_format = input("Enter word format\n(#) - vowels\n(%) - consonants\neither(*)")
-word_format.lower()
-word = ""
+def is_valid_format(word_format):
+    word_format = word_format.lower()
+    count = 0
+    is_valid = True
+    while is_valid and count < len(word_format):
+        if word_format[count] == "c" or word_format[count] == "v":
+            pass
+        else:
+            is_valid = False
 
-for kind in word_format:
-    if kind == "%":
-        word += random.choice(CONSONANTS)
-    elif kind == "#":
-        word += random.choice(VOWELS)
-    elif kind == "*":
-        word += random.choice(CONSONANTS+VOWELS)
-    else:
-        word += kind
+        count += 1
 
-print(word)
-"""
-# Automatically (randomly) generate the word_format variable
-word_format = ""
-word = ""
-for i in range(5):
-    word_format += random.choice("cv")
+    return is_valid
 
-for kind in word_format:
-    if kind == "c":
-        word += random.choice(CONSONANTS)
-    else:
-        word += random.choice(VOWELS)
-print(word)
+main()
